@@ -1,6 +1,9 @@
 body {
   font-family: "Lobster", cursive;
 }
+th {
+  text-decoration: underline;
+}
 
 table {
   border-collapse: collapse;
