@@ -1,5 +1,5 @@
 $("#select").val(localStorage.getItem("optionVal")); //local storage
-
+const languageBtn = $(".LanguageBtn");
 const mapping = {
   firstName: { path: "name.first", isVisible: true },
   lastName: { path: "name.last", isVisible: true },
@@ -8,19 +8,20 @@ const mapping = {
   src: { path: "picture.large", isVisible: true },
   gender: { path: "gender", isVisible: true },
   email: { path: "email", isVisible: true },
+  country: { path: "location.country", isVisible: true },
 };
 
 async function drawData() {
   try {
     const selectVal = localStorage.getItem("optionVal");
-    const result = await getUsers({
-      url: `https://randomuser.me/api/?results=${selectVal}`,
+    var result = await getUsers({
+      url: "./users.json",
     });
     const { results } = result;
-
+    console.log(results);
     draw(results);
   } catch (error) {
-    alert("ERROR");
+    alert("CANT LOAD THE USERS ARRAY");
   }
 }
 
@@ -60,6 +61,7 @@ $("#select").on("change", () => {
 });
 
 function drawCards(users) {
+  const languageBtn = $(".LanguageBtn");
   console.log(users);
   const cardsContainer = $("#container");
   users.forEach((user) => {
@@ -69,11 +71,17 @@ function drawCards(users) {
       <h4><b>${user.firstName}  ${user.lastName}</b><br>
       Gender:${user.gender} <br> city:${user.city}<br> Address: ${user.address}
       </h4>
+      <button onclick="countryData(${user.country})">lannguage</button>
       <p>Email: ${user.email}</p>
     </div>
   </div>`);
+
     cardsContainer.append(card);
   });
+}
+
+function countryData(countryName) {
+  alert(countryName);
 }
 
 drawData();
