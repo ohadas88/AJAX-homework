@@ -61,20 +61,24 @@ $("#select").on("change", () => {
 });
 
 function drawCards(users) {
-  const languageBtn = $(".LanguageBtn");
   console.log(users);
   const cardsContainer = $("#container");
   users.forEach((user) => {
-    const card = $(`<div class="card">
-    <img src=${user.src} alt="Avatar" style="width:100%">
-    <div class="container">
-      <h4><b>${user.firstName}  ${user.lastName}</b><br>
-      Gender:${user.gender} <br> city:${user.city}<br> Address: ${user.address}
-      </h4>
-      <button onclick="countryData(${user.country})">lannguage</button>
-      <p>Email: ${user.email}</p>
-    </div>
-  </div>`);
+    const card = $(`<div class="card"></div>`);
+    const img = $(`<img src=${user.src} alt="Avatar" style="width:100%">`);
+    const dataContainer = $(`<div class="container"></div>`);
+    const h4 = $(
+      `<h4> <b>${user.firstName}  ${user.lastName}</b><br>  Gender:${user.gender} <br> city:${user.city}<br> Address: ${user.address}</h4>`
+    );
+    const email = $(`<p>${user.email}</p>`);
+    const languageBtn = $(`<button>Language</button>`);
+
+    languageBtn.on("click", async () => {
+      alert(user.country);
+    });
+
+    dataContainer.append(h4, email, languageBtn);
+    card.append(img, dataContainer);
 
     cardsContainer.append(card);
   });
