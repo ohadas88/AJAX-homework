@@ -74,7 +74,15 @@ function drawCards(users) {
     const languageBtn = $(`<button>Language</button>`);
 
     languageBtn.on("click", async () => {
-      alert(user.country);
+      try {
+        const countryData = await getCountryData({
+          url: `https://restcountries.eu/rest/v2/name/${user.country}`,
+        });
+
+        console.log(countryData);
+      } catch (error) {
+        alert("cant load country data");
+      }
     });
 
     dataContainer.append(h4, email, languageBtn);
@@ -82,10 +90,6 @@ function drawCards(users) {
 
     cardsContainer.append(card);
   });
-}
-
-function countryData(countryName) {
-  alert(countryName);
 }
 
 drawData();

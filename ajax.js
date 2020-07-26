@@ -5,3 +5,10 @@ function getUsers(params) {
     method,
   });
 }
+function getCountryData(params) {
+  const { url, method = "GET" } = params;
+  return $.ajax({
+    url,
+    method,
+  });
+}
