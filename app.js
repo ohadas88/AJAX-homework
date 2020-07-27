@@ -79,7 +79,17 @@ function drawCards(users) {
           url: `https://restcountries.eu/rest/v2/name/${user.country}`,
         });
 
-        console.log(countryData);
+        const languagesData = countryData[0].languages;
+        const langName = languagesData
+          .map((language) => {
+            return language.name;
+          })
+          .join(" , ");
+        const divContainer = $(`<div>${langName}</div>`);
+
+        card.append(divContainer);
+
+        console.log();
       } catch (error) {
         alert("cant load country data");
       }
